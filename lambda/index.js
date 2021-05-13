@@ -39,19 +39,13 @@ let upload = function (file) {
 };
 
 let getFiles = function (parts) {
-  //let fileExt = 'png'
   let files = [];
   parts.forEach((part) => {
-    let hash = sha1(new Buffer(new Date().toString()));
 
-    let buffer = part.data;
+    let buffer = part.data
+    let fileFullName = "images/origin/" + part.filename;
 
-    let filePath = hash + "/";
-
-    let fileName = part.filename;
-    let fileFullName = filePath + fileName;
-
-    let filefullPath = "https://serverless-gyunny-bucket.s3.ap-northeast-2.amazonaws.com/" + fileFullName;
+    let filefullPath = "https://serverless-gyunny-bucket.s3.ap-northeast-2.amazonaws.com" + fileFullName;
 
     let params = {
       Bucket: "serverless-gyunny-bucket",
@@ -62,7 +56,7 @@ let getFiles = function (parts) {
     let uploadFile = {
       size: buffer.toString("ascii").length,
       type: part.type,
-      name: fileName,
+      name: fileFullName,
       full_path: filefullPath,
     };
 
