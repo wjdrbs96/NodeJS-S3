@@ -1,13 +1,12 @@
 const AWS = require("aws-sdk");
 const multipart = require("parse-multipart");
 const s3 = new AWS.S3();
-const sha1 = require("sha1");
 const bluebird = require("bluebird");
 
 exports.handler = function (event, context) {
   let result = [];
 
-  var bodyBuffer = new Buffer(event["body-json"].toString(), "base64");
+  var bodyBuffer = Buffer.from(event["body-json"].toString(), "base64");
 
   var boundary = multipart.getBoundary(event.params.header["Content-Type"]);
 
